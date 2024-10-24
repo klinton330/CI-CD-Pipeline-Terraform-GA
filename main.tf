@@ -8,9 +8,6 @@ terraform {
       version = "1.49.1"
     }
   }
-
-   backend "s3" {
-  }
 }
 
 resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
