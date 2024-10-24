@@ -1,9 +1,5 @@
 provider "genesyscloud" {}
-provider "aws"{
-  region="ap-south-1"
-  access_key="AKIAXRPWY32AGJMEM5DL"
-  secret_jey="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"
-}
+provider "aws"{}
 
 terraform {
   required_providers {
