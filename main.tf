@@ -1,4 +1,9 @@
 provider "genesyscloud" {}
+provider "aws"{
+  region="ap-south-1"
+  access_key="AKIAXRPWY32AGJMEM5DL"
+  secret_jey="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"
+}
 
 terraform {
   required_providers {
@@ -6,6 +11,12 @@ terraform {
       source = "MyPureCloud/genesyscloud"
       version = "1.49.1"
     }
+  }
+
+   backend "s3" {
+    bucket = "test-terraform-bucket-330"
+    key    = "key/terraform.tfstate"
+    region = "ap-south-1"
   }
 }
 
