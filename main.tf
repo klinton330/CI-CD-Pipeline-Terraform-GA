@@ -10,9 +10,7 @@ terraform {
   }
 
    backend "s3" {
-    bucket = ${{env.BUCKET}}
-    key    = ${{env.KEY}}
-    region = ${{env.REGION}}
+    
   }
 }
 
