@@ -12,10 +12,10 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: Dev
+    environment: Stage
     env:
-      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYS_CLIENT_ID }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYS_CLIENT_SECRET }}
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{secrets.GENESYS_CLIENT_ID }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{secrets.GENESYS_CLIENT_SECRET }}
       GENESYSCLOUD_REGION: ${{secrets.GENESYS_REGION}}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
