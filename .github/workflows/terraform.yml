@@ -12,7 +12,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{secrets.GENESYS_CLIENT_ID }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{secrets.GENESYS_CLIENT_SECRET }}
