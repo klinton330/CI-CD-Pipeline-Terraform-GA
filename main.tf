@@ -1,6 +1,4 @@
-provider "genesyscloud" {
-
-}
+provider "genesyscloud" {}
 
 terraform {
   required_providers {
