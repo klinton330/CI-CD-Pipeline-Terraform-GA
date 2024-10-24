@@ -10,9 +10,9 @@ terraform {
   }
 
    backend "s3" {
-    bucket = "test-terraform-bucket-330"
-    key    = "key/terraform.tfstate"
-    region = "ap-south-1"
+    bucket = ${{env.BUCKET}}
+    key    = ${{env.KEY}}
+    region = ${{env.REGION}}
   }
 }
 
