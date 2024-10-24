@@ -40,9 +40,13 @@ jobs:
         aws-region: ${{secrets.AWS_REGION }}
     # fInitialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: "Terraform Init"
-      run: terraform init
-    
-      # Checks that all Terraform configuration files adhere to a canonical format
+      run: |
+          terraform init \
+            -backend-config="bucket=test-terraform-bucket-${{ env.environment }}-1010" \
+            -backend-config="key=path/${{ env.environment }}/state.tfstate" \
+            -backend-config="region=ap-south-1"
+
+    # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt
     
