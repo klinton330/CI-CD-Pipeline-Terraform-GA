@@ -42,8 +42,8 @@ jobs:
     - name: "Terraform Init"
       run: |
           terraform init \
-            -backend-config="bucket=test-terraform-bucket-${{ toLower(env.environment) }}-1010" \
-            -backend-config="key=path/${{ toLower(env.environment) }}/state.tfstate" \
+            -backend-config="bucket=test-terraform-bucket-${{(env.environment)}}-1010" \
+            -backend-config="key=path/${{(env.environment)}}/state.tfstate" \
             -backend-config="region=ap-south-1"
 
     # Checks that all Terraform configuration files adhere to a canonical format
