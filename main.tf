@@ -10,7 +10,7 @@ terraform {
 }
 
 resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
-  description = "Prompt"
+  description = "Prompt for demo pupose"
   name        = "Demo_Prompt"
   resources {
     tts_string = "This is demo Prompt for testing purposes"
