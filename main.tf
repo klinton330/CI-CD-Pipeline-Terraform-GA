@@ -17,12 +17,12 @@ terraform {
 }
 
 resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
-  description = "Prompt for demo pupose"
+  description = "testing and training purposes"
   name        = "Demo_Prompt"
   resources {
-    tts_string = "This is demo Prompt for testing purposes"
+    tts_string = "This is demo Prompt for testing and training purposes"
     language   = "en-us"
-    text       = "This is demo Prompt for dev purpose"
+    text       = "This is demo Prompt testing and training purposes"
   }
 }
 
