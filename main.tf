@@ -22,7 +22,7 @@ resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
   resources {
     tts_string = "This is demo Prompt for testing purpose with enviornmen"
     language   = "en-us"
-    text       = "This is demo Prompt testing and training purposes"
+    text       = "This is demo Prompt ssss and training purposes"
   }
 }
 
