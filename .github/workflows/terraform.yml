@@ -12,12 +12,12 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    
+    environment: dev
+
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{secrets.GENESYS_CLIENT_ID }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{secrets.GENESYS_CLIENT_SECRET }}
       GENESYSCLOUD_REGION: ${{secrets.GENESYS_REGION}}
-      environment: dev
       
 
     # Use the Bash shell cap regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -42,7 +42,11 @@ jobs:
         aws-region: ${{secrets.AWS_REGION }}
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: "Terraform Init"
-      run: terraform init
+      run: |
+          terraform init \
+            -backend-config="bucket=test-terraform-bucket-dev-1010" \
+            -backend-config="key=path/dev/state.tfstate" \
+            -backend-config="region=ap-south-1"
 
     # Check that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
