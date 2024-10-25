@@ -24,5 +24,11 @@ resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
     language   = "en-us"
     text       = "This is demo Prompt ssss and training purposes"
   }
+   resources {
+    language          = "en-us"
+    text              = "Greeting message"
+    filename          = "wav/Greating.wav"
+    file_content_hash = filesha256("wav/Greating.wav")
+  }
 }
 
