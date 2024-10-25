@@ -21,7 +21,7 @@ resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
   name        = "Demo_Prompt_4"
    resources {
     language          = "en-us"
-    tts_string = "This is demo Prompt for testing purpose with enviornment addded"
+    tts_string =       "This is demo Prompt for testing purpose with enviornment addded"
     text              = "Greeting message"
     filename          = "wav/Greating.wav"
     file_content_hash = filesha256("wav/Greating.wav")
