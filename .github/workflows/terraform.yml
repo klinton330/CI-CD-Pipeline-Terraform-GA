@@ -1,9 +1,6 @@
-name: 'Terraform'
+name: 'CI/CD PRU Pipeline'
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
   workflow_dispatch:
     inputs:
       environment:
