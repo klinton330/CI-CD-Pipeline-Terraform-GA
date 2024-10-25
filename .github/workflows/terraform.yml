@@ -18,7 +18,7 @@ jobs:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{secrets.GENESYS_CLIENT_ID }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{secrets.GENESYS_CLIENT_SECRET }}
       GENESYSCLOUD_REGION: ${{secrets.GENESYS_REGION}}
-      environment: dev
+      environment: stage
       
 
     # Use the Bash shell cap regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
