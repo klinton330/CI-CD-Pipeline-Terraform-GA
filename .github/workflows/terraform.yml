@@ -62,6 +62,7 @@ jobs:
       run: terraform fmt
     
     - name: 'Terraform Validate'
-      run: terraform destroy
+      run: terraform destroy -auto-approve tfplan
 
-    
+   
+      
