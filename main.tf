@@ -19,13 +19,9 @@ terraform {
 resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
   description = "testing and training purposes with github actions"
   name        = "Demo_Prompt_4"
-  resources {
-    tts_string = "This is demo Prompt for testing purpose with enviornment addded"
-    language   = "en-us"
-    text       = "This is demo Prompt ssss and training purposes"
-  }
    resources {
     language          = "en-us"
+    tts_string = "This is demo Prompt for testing purpose with enviornment addded"
     text              = "Greeting message"
     filename          = "wav/Greating.wav"
     file_content_hash = filesha256("wav/Greating.wav")
