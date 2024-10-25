@@ -9,7 +9,11 @@ terraform {
     }
   }
 
-  
+   backend "s3" {
+    bucket = "test-terraform-bucket-330"
+    key    = "key/terraform.tfstate"
+    region = "ap-south-1"
+  }
 }
 
 resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
