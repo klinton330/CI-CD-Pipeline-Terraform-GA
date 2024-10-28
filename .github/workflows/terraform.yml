@@ -15,6 +15,7 @@ on:
         description: 'Create/Destroy'
         required: true
         default: 'Create'
+        type: choice
         options:
           - create
           - destroy
