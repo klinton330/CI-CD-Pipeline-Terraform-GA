@@ -83,4 +83,4 @@ jobs:
     
     - name: 'Terraform Destroy'
       if: github.ref == 'refs/heads/main' && github.event.inputs.resourceJob == 'cestroy'
-      run: terraform apply -auto-approve tfplan
+      run: terraform destroy -auto-approve
