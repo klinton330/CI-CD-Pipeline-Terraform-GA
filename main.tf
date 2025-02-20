@@ -17,7 +17,7 @@ terraform {
 }
 
 resource "genesyscloud_architect_user_prompt" "TestTerraformPrompt" {
-  description = "testing and training purposes with github actions"
+  description = "testing and training wav purposes with github actions"
   name        = "Test_Terraform_Prompt"
    resources {
     language          = "en-us"
