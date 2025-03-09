@@ -3,84 +3,54 @@ name: 'CI/CD PRU Pipeline'
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Select the environment'
+      client_id:
+        description: "Client ID"
         required: true
-        default: 'dev'
+        type: string
+      client_secret:
+        description: "Client Secret"
+        required: true
+        type: string
+      region:
+        description: "Genesys cloud region"
+        required: true
         type: choice
         options:
-          - dev
-          - stage
-      resourceJob:
-        description: 'Env Need to Create/Destroy'
-        required: true
-        default: 'dev'
-        type: choice
-        options:
-          - create
-          - destroy
-
-permissions:
-  contents: read
+          - mypurecloud.jp
+          - us-east-1
+          - us-west-2
+          - eu-west-1
 
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest  # Change if using a specific self-hosted runner
 
     env:
-      GENESYSCLOUD_OAUTHCLIENT_ID: ${{secrets.GENESYS_CLIENT_ID }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{secrets.GENESYS_CLIENT_SECRET }}
-      GENESYSCLOUD_REGION: ${{secrets.GENESYS_REGION}}
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ inputs.client_id }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ inputs.client_secret }}
+      GENESYSCLOUD_REGION: ${{ inputs.region }}
       environment: stage
-      
 
-    # Use the Bash shell cap regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
 
     steps:
-    # Checkout the repositor to the GitHub Actions runner
-    - name: Checkout
+    - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-      
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v3
-      with:
-        aws-access-key-id: ${{ secrets.AWS_CLIENT_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_CLIENT_SECRET }}
-        aws-region: ${{secrets.AWS_REGION }}
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: "Terraform Init"
-      run: |
-          terraform init \
-            -backend-config="bucket=test-terraform-bucket-${{ github.event.inputs.environment }}-1010" \
-            -backend-config="key=path/${{ github.event.inputs.environment }}/state.tfstate" \
-            -backend-config="region=ap-south-1"
 
-    # Check that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Init
+      run: terraform init
+
     - name: Terraform Format
       run: terraform fmt
-    
-    - name: 'Terraform Validate'
+
+    - name: Terraform Validate
       run: terraform validate
 
-    # Generates an execution plan for Terraform
-    - name: 'Terraform Plan'
-      run: terraform plan -out=tfplan
-
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: 'Terraform Apply'
-      if: github.ref == 'refs/heads/main' && github.event.inputs.resourceJob == 'create'
-      run: terraform apply -auto-approve tfplan
-    
-    - name: 'Terraform Destroy'
-      if: github.ref == 'refs/heads/main' && github.event.inputs.resourceJob == 'destroy'
-      run: terraform destroy -auto-approve
+    - name: Terraform Plan
+      run: terraform plan
