@@ -1,5 +1,4 @@
 provider "genesyscloud" {}
-provider "aws"{}
 
 terraform {
   required_providers {
@@ -7,12 +6,6 @@ terraform {
       source = "MyPureCloud/genesyscloud"
       version = "1.49.1"
     }
-  }
-
-   backend "s3" {
-    bucket = "test-terraform-bucket-330"
-    key    = "key/terraform.tfstate"
-    region = "ap-south-1"
   }
 }
 
